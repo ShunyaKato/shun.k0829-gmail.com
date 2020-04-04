@@ -1,5 +1,5 @@
 <template>
-  <header id="js-headerFix">
+  <header :class="{headerFixed: isFixed}">
     <div class="container">
       <div class="header-top">
         <h1 class="header-top__title">Music Liblary</h1>
@@ -44,15 +44,31 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-// export default Vue.extend({
 
-// })
+@Component
+export default class Header extends Vue {
+  @Prop()
+  isFixed!: boolean;
+}
 </script>
 
 <style lang="scss" scoped>
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1080px;
+}
+
 header {
   background-color: #333333;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   a {
     color: #ffffff;
   }
@@ -71,14 +87,13 @@ header {
   }
   .header__nav {
     display: flex;
-    flex-direction: row;
     padding: 0;
     margin: 0;
     &__content {
       flex-grow: 1;
       position: relative;
       padding: 5px 0;
-      margin-bottom: 5px;
+      max-width: 1080px;
       a {
         display: flex;
         justify-content: center;
@@ -89,7 +104,7 @@ header {
           font-size: 15px;
           border-radius: 3px;
           transition-duration: 0.2s;
-          width: 320px;
+          width: 90%;
         }
         &:hover {
           span {
@@ -127,13 +142,13 @@ header {
   display: none;
 }
 
-.headerFix {
+.headerFixed {
   @media (min-width: 680px) {
     position: fixed;
-    top: -81px;
+    top: -86px;
     width: 100%;
     z-index: 10;
-    min-width: 1080px;
+    box-sizing: border-box;
   }
 }
 </style>

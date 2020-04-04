@@ -1,5 +1,5 @@
 <template>
-  <div class="coverflow">
+  <div class="coverflow" :class="{indexMarginAdd: isFixed}">
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide>Slide 1</swiper-slide>
       <swiper-slide>Slide 2</swiper-slide>
@@ -16,39 +16,43 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
-export default {
-  name: "swiper-example-3d-coverflow",
-  title: "3D Coverflow effect",
+@Component({
   components: {
     Swiper,
     SwiperSlide
-  },
-  data() {
-    return {
-      swiperOption: {
-        effect: "coverflow",
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: "auto",
-        loop: true,
-        coverflowEffect: {
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
-      }
-    };
   }
-};
+})
+export default class Slider extends Vue {
+  swiperOption = {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    loop: true,
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    }
+  };
+  @Prop()
+  isFixed!: boolean;
+}
 </script>
 
 <style lang="scss" scoped>
+.indexMarginAdd {
+  @media (min-width: 680px) {
+    padding-top: 130px;
+  }
+}
+
 .coverflow {
   width: 100%;
   height: 100%;
