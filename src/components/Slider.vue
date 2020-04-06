@@ -79,4 +79,18 @@ export default class Slider extends Vue {
     color: #ffffff;
   }
 }
+
+@media (max-width: 680px) {
+  .swiper {
+    padding-top: 120px;
+    .swiper-slide {
+      width: 270px;
+      height: 270px;
+    }
+  }
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    margin-top: 68px;
+  }
+}
 </style>

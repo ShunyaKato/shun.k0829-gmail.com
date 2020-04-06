@@ -70,4 +70,28 @@ export default class ArtistSection extends Vue {
     }
   }
 }
+
+@media (max-width: 680px) {
+  .artist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__title {
+      font-size: 18px;
+      margin-bottom: 10px;
+      &::before,
+      &::after {
+        content: "・・・・・・・・・・・・・";
+        font-size: 14px;
+        letter-spacing: -5px;
+        color: #ffffff;
+        margin: 0 10px;
+      }
+    }
+    &__button {
+      width: 80%;
+      margin-bottom: 20px;
+    }
+  }
+}
 </style>

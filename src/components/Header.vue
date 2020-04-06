@@ -1,5 +1,5 @@
 <template>
-  <header :class="{headerFixed: isFixed}">
+  <header :class="{headerFixed: isFixed, open: isOpened}">
     <div class="container">
       <div class="header-top">
         <h1 class="header-top__title">Music Liblary</h1>
@@ -22,7 +22,7 @@
         </li>
       </ul>
     </div>
-    <div class="header__responsive__toggle" id="nav-toggle">
+    <div class="header__responsive__toggle" @click="openHumburger">
       <span></span>
       <span></span>
       <span></span>
@@ -49,6 +49,12 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 export default class Header extends Vue {
   @Prop()
   isFixed!: boolean;
+
+  isOpened = false;
+
+  openHumburger() {
+    this.isOpened = !this.isOpened;
+  }
 }
 </script>
 
@@ -149,6 +155,135 @@ header {
     width: 100%;
     z-index: 10;
     box-sizing: border-box;
+  }
+}
+
+@media (max-width: 680px) {
+  .container {
+    margin: 0;
+  }
+
+  header {
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 10;
+    justify-content: space-between;
+    .header-top {
+      margin: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      &__title {
+        font-size: 30px;
+        height: auto;
+      }
+    }
+    .header__nav {
+      display: none;
+    }
+  }
+
+  .header__responsive__toggle {
+    width: 36px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 1000;
+    position: relative;
+    span {
+      width: 100%;
+      height: 1px;
+      left: 0;
+      display: block;
+      background-color: #ffffff;
+      position: absolute;
+      transition: transform 0.6s ease-in-out, top 0.5s ease;
+      &:nth-child(1) {
+        top: 0;
+      }
+      &:nth-child(2) {
+        top: 14px;
+      }
+      &:nth-child(3) {
+        top: 28px;
+      }
+    }
+  }
+
+  .open {
+    .header__responsive__toggle {
+      span {
+        background-color: #333333;
+        &:nth-child(1) {
+          top: 15px;
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          top: 15px;
+          width: 0;
+          left: 50%;
+        }
+        &:nth-child(3) {
+          top: 15px;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+
+  .header__responsive {
+    background-color: #ffffff;
+    color: #333333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+    a {
+      display: block;
+      color: #333333;
+      text-decoration: none;
+      padding: 10px 0;
+      transition: color 0.6s ease;
+    }
+    ul {
+      list-style: none;
+      li {
+        opacity: 0;
+        transform: translateX(200px);
+        transition: transform 0.6s ease, opacity 0.2s ease;
+        &:nth-child(2) {
+          transition-delay: 0.15s;
+        }
+      }
+    }
+  }
+
+  .open {
+    overflow: hidden;
+    .header__responsive {
+      visibility: visible;
+      opacity: 1;
+      li {
+        opacity: 1;
+        transform: translateX(0);
+        transition: transform 1s ease, opacity 0.9s ease;
+      }
+    }
   }
 }
 </style>
