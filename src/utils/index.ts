@@ -11,10 +11,10 @@ export const fetchApi = async (artistId: any): Promise<any> => {
   )
     .then(response => {
       data = response.json();
-      console.log(data);
+      // console.log(data);
     })
     .catch(function (error) {
-      console.log(error);
+      // console.log(error);
     });
   return data;
 }

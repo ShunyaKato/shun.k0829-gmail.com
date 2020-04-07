@@ -56,8 +56,8 @@ export default class Slider extends Vue {
   isFixed!: boolean;
 
   get pickSongs() {
-    console.log("---get----");
-    console.log(this.$store.state.pickSongs);
+    // console.log("---get----");
+    // console.log(this.$store.state.pickSongs);
     return this.$store.state.pickSongs;
   }
 }

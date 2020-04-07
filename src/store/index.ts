@@ -25,8 +25,8 @@ export default new Vuex.Store({
         state.songsData[randomNumber] = state.songsData[songsLength - 1];
         songsLength = songsLength - 1;
       }
-      console.log("--pickSongs--");
-      console.log(state.pickSongs);
+      // console.log("--pickSongs--");
+      // console.log(state.pickSongs);
     },
     songsReset(state: any) {
       state.songsData = [];
