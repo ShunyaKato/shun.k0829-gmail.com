@@ -1,6 +1,6 @@
 <template>
   <div class="artistSection">
-    <div class="artist" v-for="(data, index) in data" :key="index">
+    <div class="artist" v-for="(data, index) in data" :key="index" :id="data.title">
       <h2 class="artist__title">{{data.title}}</h2>
       <a
         class="artist__button"
@@ -8,7 +8,7 @@
         :key="index"
         @click="changeArtist(artist.id)"
         :artistId="data.id"
-        href="#body"
+        v-scroll-to="'body'"
       >
         <font-awesome-icon class="artist__button__icon" icon="angle-right" />
         <p class="artist__button__name">{{artist.name}}</p>
@@ -22,8 +22,11 @@ import { artistData } from "../constants/artistData";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import VueScrollTo from "vue-scrollto";
 
 library.add(faAngleRight);
+
+Vue.use(VueScrollTo, {});
 
 @Component({
   components: {
@@ -44,6 +47,7 @@ export default class ArtistSection extends Vue {
   flex-direction: column;
   align-items: center;
   background-color: #202020;
+  padding-bottom: 100px;
 }
 
 .artist {
@@ -52,7 +56,7 @@ export default class ArtistSection extends Vue {
   grid-template-columns: repeat(3, 165px);
   column-gap: 20px;
   row-gap: 20px;
-  padding-bottom: 40px;
+  padding: 40px 0;
   &__title {
     font-size: 22px;
     margin: 0;
@@ -70,6 +74,7 @@ export default class ArtistSection extends Vue {
     border: solid 5px #dbdbdb;
     border-radius: 28px;
     position: relative;
+    cursor: pointer;
     &__icon {
       position: absolute;
       left: 15px;

@@ -6,12 +6,12 @@
       </div>
       <ul class="header__nav">
         <li class="header__nav__content">
-          <a href="#english">
+          <a v-scroll-to="'#洋楽'">
             <span>洋楽</span>
           </a>
         </li>
         <li class="header__nav__content">
-          <a href="#japanese">
+          <a v-scroll-to="'#邦楽'">
             <span>邦楽</span>
           </a>
         </li>
@@ -31,10 +31,10 @@
       <nav class="header__responsive__nav">
         <ul>
           <li class="header__nav__content">
-            <a href="#english">洋楽</a>
+            <a v-scroll-to="'#洋楽'">洋楽</a>
           </li>
           <li class="header__nav__content">
-            <a href="#japanese">邦楽</a>
+            <a v-scroll-to="'#邦楽'">邦楽</a>
           </li>
         </ul>
       </nav>
@@ -44,6 +44,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import VueScrollTo from "vue-scrollto";
+
+Vue.use(VueScrollTo, {
+  offset: -50
+});
 
 @Component
 export default class Header extends Vue {
