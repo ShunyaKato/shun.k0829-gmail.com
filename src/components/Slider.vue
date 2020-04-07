@@ -1,10 +1,19 @@
 <template>
   <div class="coverflow" :class="{indexMarginAdd: isFixed}">
     <swiper class="swiper" :options="swiperOption">
-      <swiper-slide>Slide 1</swiper-slide>
-      <swiper-slide>Slide 2</swiper-slide>
-      <swiper-slide>Slide 3</swiper-slide>
-      <swiper-slide>Slide 4</swiper-slide>
+      <swiper-slide v-for="(image, index) in pickSongsImage" :key="index">
+        <img :src="image" />
+        <p>test</p>
+      </swiper-slide>
+      <!-- <swiper-slide>
+        <img :src="pickSongsImage[1]" />
+      </swiper-slide>
+      <swiper-slide>
+        <img :src="pickSongsImage[2]" />
+      </swiper-slide>
+      <swiper-slide>
+        <img :src="pickSongsImage[3]" />
+      </swiper-slide>-->
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
@@ -43,6 +52,10 @@ export default class Slider extends Vue {
   };
   @Prop()
   isFixed!: boolean;
+
+  get pickSongsImage() {
+    return this.$store.state.pickSongsImage;
+  }
 }
 </script>
 

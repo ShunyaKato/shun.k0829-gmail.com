@@ -44,7 +44,7 @@ export const artistData = [
         id: "271551"
       },
       {
-        name: "BUMP OF CHICKEN",
+        name: "BUMP",
         id: "355179"
       },
       {
