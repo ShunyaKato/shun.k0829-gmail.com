@@ -1,18 +1,20 @@
 <template>
   <div class="coverflow" :class="{indexMarginAdd: isFixed}">
-    <swiper class="swiper" :options="swiperOption">
-      <swiper-slide v-for="(image, index) in pickSongsImage" :key="index">
-        <img :src="image" />
-        <p>test</p>
+    <swiper class="swiper" :options="swiperOption" v-if="pickSongs && pickSongs.length > 0">
+      <swiper-slide v-for="(pickSong, index) in pickSongs" :key="index">
+        <a :href="pickSong.link">
+          <img class="songImage" :src="pickSong.image" />
+        </a>
+        <p>{{pickSong.title}}</p>
       </swiper-slide>
       <!-- <swiper-slide>
-        <img :src="pickSongsImage[1]" />
+        <img :src="pickSongs[1]" />
       </swiper-slide>
       <swiper-slide>
-        <img :src="pickSongsImage[2]" />
+        <img :src="pickSongs[2]" />
       </swiper-slide>
       <swiper-slide>
-        <img :src="pickSongsImage[3]" />
+        <img :src="pickSongs[3]" />
       </swiper-slide>-->
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -53,8 +55,10 @@ export default class Slider extends Vue {
   @Prop()
   isFixed!: boolean;
 
-  get pickSongsImage() {
-    return this.$store.state.pickSongsImage;
+  get pickSongs() {
+    console.log("---get----");
+    console.log(this.$store.state.pickSongs);
+    return this.$store.state.pickSongs;
   }
 }
 </script>
@@ -75,21 +79,25 @@ export default class Slider extends Vue {
 .swiper {
   height: 100%;
   width: 100%;
-  padding: 50px 0;
+  padding: 50px 0 70px;
 
   .swiper-slide {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
     width: 480px;
     height: 480px;
-    text-align: center;
+    // text-align: center;
     font-weight: bold;
     font-size: 20px;
-    background-color: #2c8dfb;
-    background-position: center;
-    background-size: cover;
+    // background-color: #2c8dfb;
+    // background-position: center;
+    // background-size: cover;
     color: #ffffff;
+    .songImage {
+      width: 100%;
+    }
   }
 }
 

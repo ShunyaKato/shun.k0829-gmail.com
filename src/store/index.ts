@@ -6,60 +6,50 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    coverImage: [],
-    songTitle: [],
-    songLink: [],
-    pickCoverImage: [],
-    pickSongTitle: [],
-    pickSongLink: [],
+    songsData: [],
+    pickSongs: [],
   },
   mutations: {
-    setSongImage(state: any, songObject: any) {
-      // console.log(image);
-      state.coverImage.push(songObject.image);
-      state.songTitle.push(songObject.title);
-      state.songLink.push(songObject.link);
-      // console.log(state.coverImage);
+    setSongs(state: any, songObject: any) {
+      state.songsData.push({
+        image: songObject.image,
+        title: songObject.title,
+        link: songObject.link
+      });
     },
     pickRandomSongs(state: any) {
-      let songsLength = state.coverImage.length;
+      let songsLength = state.songsData.length;
       for (let i = 1; i < 5; i++) {
         const randomNumber = Math.floor(Math.random() * songsLength)
-        state.pickCoverImage.push(state.coverImage[randomNumber]);
-        state.pickSongTitle.push(state.songTitle[randomNumber]);
-        state.pickSongLink.push(state.songLink[randomNumber]);
-        state.coverImage[randomNumber] = state.coverImage[songsLength - 1];
-        state.songTitle[randomNumber] = state.songTitle[songsLength - 1];
-        state.songLink[randomNumber] = state.songLink[songsLength - 1];
+        state.pickSongs.push(state.songsData[randomNumber]);
+        state.songsData[randomNumber] = state.songsData[songsLength - 1];
         songsLength = songsLength - 1;
       }
-      console.log("--pickSongImage--");
-      console.log(state.pickCoverImage);
+      console.log("--pickSongs--");
+      console.log(state.pickSongs);
+    },
+    songsReset(state: any) {
+      state.songsData = [];
+      state.pickSongs = [];
     }
   },
   actions: {
     async createSongDataArray({ state, commit }, artistId) {
       const data = await fetchApi(artistId);
       const songs: any[] = data.response.songs;
+      commit("songsReset");
 
       for (let i = 0; i < songs.length; i++) {
-        // console.log("test");
-        // console.log(songs[i]);
-        commit("setSongImage", {
+        commit("setSongs", {
           image: songs[i].song_art_image_url,
           title: songs[i].title,
           link: songs[i].url
         });
-        // state.coverImage = songs;
-        // state.coverImage.push(songs[i].song_art_image_url);
-        // state.songTitle.push(songs[i].title);
-        // state.songLink.push(songs[i].url);
       }
-      console.log(state.coverImage);
       commit("pickRandomSongs");
     }
   },
-  modules: {
-  }
+  // modules: {
+  // }
 })
 

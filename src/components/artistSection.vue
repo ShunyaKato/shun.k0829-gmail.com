@@ -2,7 +2,14 @@
   <div class="artistSection">
     <div class="artist" v-for="(data, index) in data" :key="index">
       <h2 class="artist__title">{{data.title}}</h2>
-      <a class="artist__button" v-for="(artist, index) in data.data" :key="index">
+      <a
+        class="artist__button"
+        v-for="(artist, index) in data.data"
+        :key="index"
+        @click="changeArtist(artist.id)"
+        :artistId="data.id"
+        href="#body"
+      >
         <font-awesome-icon class="artist__button__icon" icon="angle-right" />
         <p class="artist__button__name">{{artist.name}}</p>
       </a>
@@ -25,8 +32,11 @@ library.add(faAngleRight);
 })
 export default class ArtistSection extends Vue {
   data: any[] = artistData;
+
+  async changeArtist(id: string) {
+    await this.$store.dispatch("createSongDataArray", id);
+  }
 }
-// console.log(artistData);
 </script>
 <style lang="scss" scoped>
 .artistSection {
