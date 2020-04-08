@@ -48,6 +48,7 @@ export default class ArtistSection extends Vue {
   align-items: center;
   background-color: #202020;
   padding-bottom: 100px;
+  margin-top: 40px;
 }
 
 .artist {
@@ -56,7 +57,7 @@ export default class ArtistSection extends Vue {
   grid-template-columns: repeat(3, 165px);
   column-gap: 20px;
   row-gap: 20px;
-  padding: 40px 0;
+  margin-bottom: 40px;
   &__title {
     font-size: 22px;
     margin: 0;

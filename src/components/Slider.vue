@@ -11,7 +11,11 @@
         :key="index"
       >
         <a class="coverflow__swiper__content__link" :href="pickSong.link">
-          <img class="coverflow__swiper__content__link__image" :src="pickSong.image" />
+          <img
+            class="coverflow__swiper__content__link__image"
+            :src="pickSong.image"
+            alt="coverImage"
+          />
         </a>
         <p class="coverflow__swiper__content__title">{{pickSong.title}}</p>
         <button
