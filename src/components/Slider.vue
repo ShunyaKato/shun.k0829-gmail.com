@@ -21,8 +21,8 @@
         <button
           class="coverflow__swiper__content__button"
           type="button"
-          @click="addLike(pickSong.image, pickSong.title, pickSong.link, pickSong.id)"
-        >お気に入りに追加</button>
+          @click="toggleLike(pickSong.image, pickSong.title, pickSong.link, pickSong.id)"
+        >{{toggleButtonText(pickSong.isLiked)}}</button>
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -64,12 +64,18 @@ export default class Slider extends Vue {
   @Prop()
   isFixed!: boolean;
 
+  buttonText = "";
+
   get pickSongs() {
     return this.$store.state.pickSongs;
   }
 
-  addLike(image: string, title: string, link: string, id: number) {
-    this.$store.commit("addLikeSongs", {
+  toggleButtonText(isLiked: boolean) {
+    return isLiked ? "お気に入り解除" : "お気に入り登録";
+  }
+
+  toggleLike(image: string, title: string, link: string, id: number) {
+    this.$store.commit("toggleLikeSongs", {
       image: image,
       title: title,
       link: link,

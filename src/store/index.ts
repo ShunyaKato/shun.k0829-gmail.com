@@ -29,13 +29,21 @@ export default new Vuex.Store({
       state.songsData = [];
       state.pickSongs = [];
     },
-    addLikeSongs(state: any, likeSongObject: any) {
+    toggleLikeSongs(state: any, likeSongObject: any) {
       state.likeSongs.unshift({
         image: likeSongObject.image,
         title: likeSongObject.title,
         link: likeSongObject.link,
-        id: likeSongObject.id
+        id: likeSongObject.id,
+        isLiked: !likeSongObject.isLiked
       })
+      const newPickSongs = state.pickSongs.map((pickSong: any) => {
+        if (pickSong.id === likeSongObject.id) {
+          pickSong.isLiked = !pickSong.isLiked;
+        }
+        return pickSong
+      })
+      state.pickSongs = newPickSongs;
     }
   },
   actions: {
@@ -49,7 +57,8 @@ export default new Vuex.Store({
           image: songs[i].song_art_image_url,
           title: songs[i].title,
           link: songs[i].url,
-          id: songs[i].id
+          id: songs[i].id,
+          isLiked: false
         });
       }
       commit("pickRandomSongs");
