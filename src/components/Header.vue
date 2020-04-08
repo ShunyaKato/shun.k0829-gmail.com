@@ -2,27 +2,32 @@
   <header :class="{headerFixed: isFixed, open: isOpened}">
     <div class="container">
       <div class="header-top">
-        <h1 class="header-top__title">Music Liblary</h1>
+        <router-link to="/" class="header-top__title">Music Liblary</router-link>
+        <!-- <h1 class="header-top__title">Music Liblary</h1> -->
       </div>
-      <ul class="header__nav">
+      <ul class="header__nav" v-if="this.$route.path != '/like'">
         <li class="header__nav__content">
-          <a v-scroll-to="'#洋楽'">
-            <span>洋楽</span>
+          <a class="header__nav__content__link" v-scroll-to="'#洋楽'">
+            <span class="header__nav__content__link__title">洋楽</span>
           </a>
         </li>
         <li class="header__nav__content">
-          <a v-scroll-to="'#邦楽'">
-            <span>邦楽</span>
+          <a class="header__nav__content__link" v-scroll-to="'#邦楽'">
+            <span class="header__nav__content__link__title">邦楽</span>
           </a>
         </li>
         <li class="header__nav__content">
-          <a href>
-            <span>○○○</span>
-          </a>
+          <router-link class="header__nav__content__link" to="/like">
+            <span class="header__nav__content__link__title">お気に入り</span>
+          </router-link>
         </li>
       </ul>
     </div>
-    <div class="header__responsive__toggle" @click="openHumburger">
+    <div
+      class="header__responsive__toggle"
+      @click="openHumburger"
+      v-if="this.$route.path != '/like'"
+    >
       <span></span>
       <span></span>
       <span></span>
@@ -31,10 +36,10 @@
       <nav class="header__responsive__nav">
         <ul>
           <li class="header__nav__content">
-            <a v-scroll-to="'#洋楽'">洋楽</a>
+            <a v-scroll-to="'#洋楽'" @click="openHumburger">洋楽</a>
           </li>
           <li class="header__nav__content">
-            <a v-scroll-to="'#邦楽'">邦楽</a>
+            <a v-scroll-to="'#邦楽'" @click="openHumburger">邦楽</a>
           </li>
         </ul>
       </nav>
@@ -43,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import VueScrollTo from "vue-scrollto";
 
 Vue.use(VueScrollTo, {
@@ -87,9 +92,10 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 16px;
+    padding-bottom: 25px;
     &__title {
       font-family: Yu Gothic;
+      font-weight: bold;
       color: #ffffff;
       height: 50px;
       font-size: 50px;
@@ -105,11 +111,11 @@ header {
       position: relative;
       padding: 5px 0;
       max-width: 1080px;
-      a {
+      &__link {
         display: flex;
         justify-content: center;
         width: 100%;
-        span {
+        &__title {
           padding: 8.5px 0;
           text-align: center;
           font-size: 15px;
@@ -118,7 +124,7 @@ header {
           width: 90%;
         }
         &:hover {
-          span {
+          .header__nav__content__link__title {
             background-color: #868686;
             color: #ffffff;
             transition-duration: 0.2s;
@@ -184,6 +190,7 @@ header {
       height: 60px;
       display: flex;
       align-items: center;
+      padding-bottom: 0;
       &__title {
         font-size: 30px;
         height: auto;

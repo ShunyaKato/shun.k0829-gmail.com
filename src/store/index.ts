@@ -8,14 +8,13 @@ export default new Vuex.Store({
   state: {
     songsData: [],
     pickSongs: [],
+    likeSongs: [],
   },
   mutations: {
     setSongs(state: any, songObject: any) {
-      state.songsData.push({
-        image: songObject.image,
-        title: songObject.title,
-        link: songObject.link
-      });
+      state.songsData.push(songObject);
+      // console.log("---songData---");
+      // console.log(state.songsData);
     },
     pickRandomSongs(state: any) {
       let songsLength = state.songsData.length;
@@ -25,12 +24,18 @@ export default new Vuex.Store({
         state.songsData[randomNumber] = state.songsData[songsLength - 1];
         songsLength = songsLength - 1;
       }
-      // console.log("--pickSongs--");
-      // console.log(state.pickSongs);
     },
     songsReset(state: any) {
       state.songsData = [];
       state.pickSongs = [];
+    },
+    addLikeSongs(state: any, likeSongObject: any) {
+      state.likeSongs.unshift({
+        image: likeSongObject.image,
+        title: likeSongObject.title,
+        link: likeSongObject.link,
+        id: likeSongObject.id
+      })
     }
   },
   actions: {
@@ -43,13 +48,12 @@ export default new Vuex.Store({
         commit("setSongs", {
           image: songs[i].song_art_image_url,
           title: songs[i].title,
-          link: songs[i].url
+          link: songs[i].url,
+          id: songs[i].id
         });
       }
       commit("pickRandomSongs");
     }
   },
-  // modules: {
-  // }
 })
 

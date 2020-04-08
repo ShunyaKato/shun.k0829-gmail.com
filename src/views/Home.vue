@@ -7,11 +7,11 @@
 </template>
 
 <script>
+import "normalize.css";
 import { Component, Prop, Vue } from "vue-property-decorator";
 import Header from "@/components/Header";
 import Slider from "@/components/Slider";
 import artistSection from "@/components/artistSection";
-import "normalize.css";
 import { fetchApi } from "@/utils/index";
 
 @Component({
@@ -25,6 +25,7 @@ export default class Home extends Vue {
   //data
   isFixed = false;
 
+  //beforeCreate
   async beforeCreate() {
     await this.$store.dispatch("createSongDataArray", "488");
   }

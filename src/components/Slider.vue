@@ -1,21 +1,25 @@
 <template>
   <div class="coverflow" :class="{indexMarginAdd: isFixed}">
-    <swiper class="swiper" :options="swiperOption" v-if="pickSongs && pickSongs.length > 0">
-      <swiper-slide v-for="(pickSong, index) in pickSongs" :key="index">
-        <a :href="pickSong.link">
-          <img class="songImage" :src="pickSong.image" />
+    <swiper
+      class="coverflow__swiper"
+      :options="swiperOption"
+      v-if="pickSongs && pickSongs.length > 0"
+    >
+      <swiper-slide
+        class="coverflow__swiper__content"
+        v-for="(pickSong, index) in pickSongs"
+        :key="index"
+      >
+        <a class="coverflow__swiper__content__link" :href="pickSong.link">
+          <img class="coverflow__swiper__content__link__image" :src="pickSong.image" />
         </a>
-        <p>{{pickSong.title}}</p>
+        <p class="coverflow__swiper__content__title">{{pickSong.title}}</p>
+        <button
+          class="coverflow__swiper__content__button"
+          type="button"
+          @click="addLike(pickSong.image, pickSong.title, pickSong.link, pickSong.id)"
+        >お気に入りに追加</button>
       </swiper-slide>
-      <!-- <swiper-slide>
-        <img :src="pickSongs[1]" />
-      </swiper-slide>
-      <swiper-slide>
-        <img :src="pickSongs[2]" />
-      </swiper-slide>
-      <swiper-slide>
-        <img :src="pickSongs[3]" />
-      </swiper-slide>-->
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
@@ -26,6 +30,7 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
+import "normalize.css";
 
 @Component({
   components: {
@@ -56,9 +61,16 @@ export default class Slider extends Vue {
   isFixed!: boolean;
 
   get pickSongs() {
-    // console.log("---get----");
-    // console.log(this.$store.state.pickSongs);
     return this.$store.state.pickSongs;
+  }
+
+  addLike(image: string, title: string, link: string, id: number) {
+    this.$store.commit("addLikeSongs", {
+      image: image,
+      title: title,
+      link: link,
+      id: id
+    });
   }
 }
 </script>
@@ -74,41 +86,70 @@ export default class Slider extends Vue {
   width: 100%;
   height: 100%;
   background-color: #202020;
-}
-
-.swiper {
-  height: 100%;
-  width: 100%;
-  padding: 50px 0 70px;
-
-  .swiper-slide {
-    display: flex;
-    flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
-    width: 480px;
-    height: 480px;
-    // text-align: center;
-    font-weight: bold;
-    font-size: 20px;
-    // background-color: #2c8dfb;
-    // background-position: center;
-    // background-size: cover;
-    color: #ffffff;
-    .songImage {
-      width: 100%;
+  &__swiper {
+    height: 100%;
+    width: 100%;
+    padding: 50px 0 100px;
+    &__content {
+      display: flex;
+      flex-direction: column;
+      width: 480px;
+      height: 480px;
+      font-weight: bold;
+      font-size: 20px;
+      color: #ffffff;
+      &__link {
+        &__image {
+          width: 100%;
+        }
+      }
+      &__button {
+        width: 50%;
+        margin: 0 auto;
+        font-size: 16px;
+        padding-bottom: 17.5px;
+      }
     }
   }
 }
+
+// .swiper {
+//   height: 100%;
+//   width: 100%;
+//   padding: 50px 0 100px;
+//   .swiper-slide {
+//     display: flex;
+//     flex-direction: column;
+//     width: 480px;
+//     height: 480px;
+//     font-weight: bold;
+//     font-size: 20px;
+//     color: #ffffff;
+//     .song {
+//       &__Image {
+//         width: 100%;
+//       }
+//     }
+//   }
+// }
 
 @media (max-width: 680px) {
-  .swiper {
-    padding-top: 120px;
-    .swiper-slide {
-      width: 270px;
-      height: 270px;
+  .coverflow {
+    &__swiper {
+      padding-top: 120px;
+      &__content {
+        width: 270px;
+        height: 270px;
+      }
     }
   }
+  // .swiper {
+  //   padding-top: 120px;
+  //   .swiper-slide {
+  //     width: 270px;
+  //     height: 270px;
+  //   }
+  // }
   .swiper-button-prev::after,
   .swiper-button-next::after {
     margin-top: 68px;
