@@ -5,7 +5,7 @@ export const fetchApi = async (artistId: any): Promise<any> => {
     {
       headers: {
         "x-rapidapi-host": "genius.p.rapidapi.com",
-        "x-rapidapi-key": "fb9b03ccd3msh08a2d37de980038p147519jsn839de88844ae"
+        "x-rapidapi-key": process.env.VUE_APP_API_KEY
       }
     }
   )

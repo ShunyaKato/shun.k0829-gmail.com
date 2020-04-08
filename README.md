@@ -1,4 +1,5 @@
 # vue_portfolio
+url: https://amazing-goldberg-c57ce7.netlify.com
 
 ## Project setup
 ```
