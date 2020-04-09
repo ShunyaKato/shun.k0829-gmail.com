@@ -3,7 +3,6 @@
     <div class="container">
       <div class="header-top">
         <router-link to="/" class="header-top__title">Music Liblary</router-link>
-        <!-- <h1 class="header-top__title">Music Liblary</h1> -->
       </div>
       <ul class="header__nav" v-if="this.$route.path != '/like'">
         <li class="header__nav__content">
@@ -34,12 +33,17 @@
     </div>
     <div class="header__responsive" id="header-hamburger">
       <nav class="header__responsive__nav">
-        <ul>
-          <li class="header__nav__content">
-            <a v-scroll-to="'#洋楽'" @click="openHumburger">洋楽</a>
+        <ul class="header__responsive__nav__content">
+          <li class="header__responsive__nav__content__list">
+            <a class="header__responsive__nav__content__list__button" v-scroll-to="'#洋楽'" @click="openHumburger">洋楽</a>
           </li>
-          <li class="header__nav__content">
-            <a v-scroll-to="'#邦楽'" @click="openHumburger">邦楽</a>
+          <li class="header__responsive__nav__content__list">
+            <a class="header__responsive__nav__content__list__button" v-scroll-to="'#邦楽'" @click="openHumburger">邦楽</a>
+          </li>
+          <li class="header__responsive__nav__content__list">
+            <router-link class="header__responsive__nav__content__list__button" to="/like">
+              お気に入り
+            </router-link>
           </li>
         </ul>
       </nav>
@@ -280,6 +284,9 @@ header {
         transition: transform 0.6s ease, opacity 0.2s ease;
         &:nth-child(2) {
           transition-delay: 0.15s;
+        }
+        &:nth-child(3) {
+          transition-delay: 0.3s;
         }
       }
     }
