@@ -125,6 +125,7 @@ export default class Slider extends Vue {
         margin: 0 auto;
         font-size: 16px;
         padding-bottom: 17.5px;
+        cursor: pointer;
       }
     }
   }

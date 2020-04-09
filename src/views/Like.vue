@@ -49,7 +49,7 @@ export default class Like extends Vue {
   margin: 50px auto;
   flex-wrap: wrap;
   &__content {
-    margin: 0 10px;
+    margin: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
