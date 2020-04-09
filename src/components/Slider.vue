@@ -130,26 +130,6 @@ export default class Slider extends Vue {
   }
 }
 
-// .swiper {
-//   height: 100%;
-//   width: 100%;
-//   padding: 50px 0 100px;
-//   .swiper-slide {
-//     display: flex;
-//     flex-direction: column;
-//     width: 480px;
-//     height: 480px;
-//     font-weight: bold;
-//     font-size: 20px;
-//     color: #ffffff;
-//     .song {
-//       &__Image {
-//         width: 100%;
-//       }
-//     }
-//   }
-// }
-
 @media (max-width: 680px) {
   .coverflow {
     &__swiper {
@@ -160,13 +140,6 @@ export default class Slider extends Vue {
       }
     }
   }
-  // .swiper {
-  //   padding-top: 120px;
-  //   .swiper-slide {
-  //     width: 270px;
-  //     height: 270px;
-  //   }
-  // }
   .swiper-button-prev::after,
   .swiper-button-next::after {
     margin-top: 68px;

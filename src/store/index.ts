@@ -30,7 +30,6 @@ export default new Vuex.Store({
       state.pickSongs = [];
     },
     toggleLikeSongs(state: any, likeSongObject: any) {
-
       if (!likeSongObject.isLiked) {
         state.likeSongs.unshift({
           image: likeSongObject.image,
@@ -43,7 +42,6 @@ export default new Vuex.Store({
         const newLikeSongs = state.likeSongs.filter((likeSong: any) => likeSong.id !== likeSongObject.id)
         state.likeSongs = newLikeSongs;
       }
-
       const newPickSongs = state.pickSongs.map((pickSong: any) => {
         if (pickSong.id === likeSongObject.id) {
           pickSong.isLiked = !pickSong.isLiked;
@@ -51,6 +49,11 @@ export default new Vuex.Store({
         return pickSong
       })
       state.pickSongs = newPickSongs;
+    },
+
+    removeLikeSongs(state: any, songId: any) {
+      const newLikeSongs = state.likeSongs.filter((likeSong: any) => likeSong.id !== songId)
+      state.likeSongs = newLikeSongs;
     }
   },
   actions: {

@@ -8,7 +8,7 @@
           <img class="like__content__link__image" :src="likeSong.image" alt="coverImage" />
         </a>
         <p class="like__content__title">{{likeSong.title}}</p>
-        <button class="like__content__button">削除</button>
+        <button class="like__content__button" @click="removeLiked(likeSong.id)">削除</button>
       </div>
     </div>
   </div>
@@ -30,6 +30,9 @@ export default class Like extends Vue {
   get likeSongs() {
     return this.$store.state.likeSongs;
   }
+  removeLiked(songId: number) {
+    this.$store.commit("removeLikeSongs", songId);
+  }
 }
 </script>
 
@@ -45,9 +48,6 @@ export default class Like extends Vue {
   max-width: 1080px;
   margin: 50px auto;
   flex-wrap: wrap;
-  // grid-template-columns: repeat(5, 200px);
-  // column-gap: 20px;
-  // row-gap: 20px;
   &__content {
     margin: 0 10px;
     display: flex;
@@ -62,8 +62,11 @@ export default class Like extends Vue {
     &__title {
       font-size: 18px;
       max-width: 180px;
-      margin: 0;
+      margin: 10px 0;
       text-align: center;
+    }
+    &__button {
+      border-radius: 5px;
     }
   }
 }
