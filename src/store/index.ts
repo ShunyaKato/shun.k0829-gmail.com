@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { fetchApi } from '@/utils/index'
-
+// import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -30,13 +30,20 @@ export default new Vuex.Store({
       state.pickSongs = [];
     },
     toggleLikeSongs(state: any, likeSongObject: any) {
-      state.likeSongs.unshift({
-        image: likeSongObject.image,
-        title: likeSongObject.title,
-        link: likeSongObject.link,
-        id: likeSongObject.id,
-        isLiked: !likeSongObject.isLiked
-      })
+
+      if (!likeSongObject.isLiked) {
+        state.likeSongs.unshift({
+          image: likeSongObject.image,
+          title: likeSongObject.title,
+          link: likeSongObject.link,
+          id: likeSongObject.id,
+          isLiked: true
+        })
+      } else {
+        const newLikeSongs = state.likeSongs.filter((likeSong: any) => likeSong.id !== likeSongObject.id)
+        state.likeSongs = newLikeSongs;
+      }
+
       const newPickSongs = state.pickSongs.map((pickSong: any) => {
         if (pickSong.id === likeSongObject.id) {
           pickSong.isLiked = !pickSong.isLiked;
@@ -64,5 +71,6 @@ export default new Vuex.Store({
       commit("pickRandomSongs");
     }
   },
+  // plugins: [createPersistedState()]
 })
 
