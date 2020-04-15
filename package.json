@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "copy": "cpx -C public/._redirects dist"
+    "copy": "cpx -C public/_redirects dist"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
