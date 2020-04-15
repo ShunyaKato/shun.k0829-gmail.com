@@ -1,20 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { fetchApi } from '@/utils/index'
-// import createPersistedState from "vuex-persistedstate";
+import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex)
 
+const initialState = {
+  songsData: [],
+  pickSongs: [],
+  likeSongs: [],
+}
+
 export default new Vuex.Store({
-  state: {
-    songsData: [],
-    pickSongs: [],
-    likeSongs: [],
-  },
+  state: initialState,
   mutations: {
     setSongs(state: any, songObject: any) {
       state.songsData.push(songObject);
-      // console.log("---songData---");
-      // console.log(state.songsData);
     },
     pickRandomSongs(state: any) {
       let songsLength = state.songsData.length;
@@ -74,6 +74,6 @@ export default new Vuex.Store({
       commit("pickRandomSongs");
     }
   },
-  // plugins: [createPersistedState()]
+  plugins: [createPersistedState()]
 })
 
