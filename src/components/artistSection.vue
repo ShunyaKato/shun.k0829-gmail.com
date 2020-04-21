@@ -79,7 +79,7 @@ export default class ArtistSection extends Vue {
     &__icon {
       position: absolute;
       left: 15px;
-      top: 14.5px;
+      top: 13.5px;
     }
     &__name {
       font-size: 14px;

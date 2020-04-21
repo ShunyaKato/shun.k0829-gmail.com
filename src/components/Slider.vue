@@ -22,7 +22,14 @@
           class="coverflow__swiper__content__button"
           type="button"
           @click="toggleLike(pickSong.image, pickSong.title, pickSong.link, pickSong.id, pickSong.isLiked)"
-        >{{toggleButtonText(pickSong.isLiked)}}</button>
+        >
+          <font-awesome-icon
+            class="coverflow__swiper__content__button__icon"
+            icon="heart"
+            :class="{isLikedActive: pickSong.isLiked}"
+          />
+          <p class="coverflow__swiper__content__button__text">{{toggleButtonText(pickSong.isLiked)}}</p>
+        </button>
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -33,13 +40,19 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import "swiper/css/swiper.css";
 import "normalize.css";
+
+library.add(faHeart);
 
 @Component({
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    FontAwesomeIcon
   }
 })
 export default class Slider extends Vue {
@@ -121,29 +134,50 @@ export default class Slider extends Vue {
         }
       }
       &__button {
-        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30%;
         margin: 0 auto;
-        font-size: 16px;
-        padding-bottom: 17.5px;
+        padding: 3px 0px;
+        border-radius: 10px;
+        color: #202020;
+        background-color: #ffffff;
         cursor: pointer;
+        font-size: 14px;
+        &__icon {
+          color: #202020;
+          padding: 0 5px 0 0;
+        }
+        &__text {
+          margin: 1px 0 0;
+        }
       }
     }
   }
 }
 
+.isLikedActive {
+  color: #e0255d;
+}
+
 @media (max-width: 680px) {
   .coverflow {
+    color: #ffffff;
     &__swiper {
       padding-top: 120px;
       &__content {
         width: 270px;
         height: 270px;
+        &__button {
+          width: 52%;
+        }
       }
     }
   }
   .swiper-button-prev::after,
   .swiper-button-next::after {
-    margin-top: 68px;
+    margin-top: 8px;
   }
 }
 </style>
