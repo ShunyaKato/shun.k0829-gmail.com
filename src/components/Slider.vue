@@ -18,7 +18,7 @@
           />
         </a>
         <p class="coverflow__swiper__content__title">{{pickSong.title}}</p>
-        <button
+        <a
           class="coverflow__swiper__content__button"
           type="button"
           @click="toggleLike(pickSong.image, pickSong.title, pickSong.link, pickSong.id, pickSong.isLiked)"
@@ -29,7 +29,7 @@
             :class="{isLikedActive: pickSong.isLiked}"
           />
           <p class="coverflow__swiper__content__button__text">{{toggleButtonText(pickSong.isLiked)}}</p>
-        </button>
+        </a>
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -135,6 +135,7 @@ export default class Slider extends Vue {
       }
       &__button {
         display: flex;
+        display: -webkit-box;
         align-items: center;
         justify-content: center;
         width: 30%;
@@ -145,6 +146,17 @@ export default class Slider extends Vue {
         background-color: #ffffff;
         cursor: pointer;
         font-size: 14px;
+        // -webkit-box-sizing: content-box;
+        -webkit-appearance: none;
+        // appearance: button;
+        // border: none;
+        // box-sizing: border-box;
+        // &::-webkit-search-decoration {
+        //   display: none;
+        // }
+        // &::focus {
+        //   outline-offset: -2px;
+        // }
         &__icon {
           color: #202020;
           padding: 0 5px 0 0;
