@@ -20,7 +20,6 @@
         <p class="coverflow__swiper__content__title">{{pickSong.title}}</p>
         <a
           class="coverflow__swiper__content__button"
-          type="button"
           @click="toggleLike(pickSong.image, pickSong.title, pickSong.link, pickSong.id, pickSong.isLiked)"
         >
           <font-awesome-icon
@@ -140,29 +139,19 @@ export default class Slider extends Vue {
         justify-content: center;
         width: 30%;
         margin: 0 auto;
-        padding: 3px 0px;
+        padding: 2px 0px;
         border-radius: 10px;
         color: #202020;
         background-color: #ffffff;
         cursor: pointer;
         font-size: 14px;
-        // -webkit-box-sizing: content-box;
         -webkit-appearance: none;
-        // appearance: button;
-        // border: none;
-        // box-sizing: border-box;
-        // &::-webkit-search-decoration {
-        //   display: none;
-        // }
-        // &::focus {
-        //   outline-offset: -2px;
-        // }
         &__icon {
           color: #202020;
-          padding: 0 5px 0 0;
+          padding: 2.5px 5px 0 0;
         }
         &__text {
-          margin: 1px 0 0;
+          margin: 3px 0 0;
         }
       }
     }
